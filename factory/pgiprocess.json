@@ -1,0 +1,9 @@
+{
+	"name": "pgiprocess",
+	"location": "ukwest",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "20497e01-4da6-4f96-8924-aafa22e1855c",
+		"tenantId": "efd1617f-3385-45af-99c1-928f75039d36"
+	}
+}
