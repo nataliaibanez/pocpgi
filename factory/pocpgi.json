@@ -1,0 +1,9 @@
+{
+	"name": "pocpgi",
+	"location": "ukwest",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ae5e8444-b53b-4007-a3fd-eeafc6db14d4",
+		"tenantId": "efd1617f-3385-45af-99c1-928f75039d36"
+	}
+}
