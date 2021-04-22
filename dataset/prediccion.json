@@ -1,0 +1,32 @@
+{
+	"name": "prediccion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "storagepocpgi",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "prediccion_19042021.csv",
+				"container": "prediction"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "delivery",
+				"type": "String"
+			},
+			{
+				"name": "fail",
+				"type": "String"
+			}
+		]
+	}
+}

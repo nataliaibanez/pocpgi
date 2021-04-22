@@ -1,0 +1,30 @@
+{
+	"name": "predicciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "storagepocpgi",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "prediccion",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "prediccion_19042021.xlsx",
+				"container": "prediction"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "delivery",
+				"type": "String"
+			},
+			{
+				"name": "fail",
+				"type": "String"
+			}
+		]
+	}
+}
