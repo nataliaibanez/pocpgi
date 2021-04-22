@@ -1,0 +1,34 @@
+{
+	"name": "status",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "storagepocpgi",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ZVL05N1.xlsx",
+				"container": "status"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "delivery",
+				"type": "String"
+			},
+			{
+				"name": "del_status",
+				"type": "String"
+			},
+			{
+				"name": "Code",
+				"type": "String"
+			}
+		]
+	}
+}
