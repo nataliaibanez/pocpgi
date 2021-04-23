@@ -6,14 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "pgiprocess"
-		},
-		"AzureSqlDatabase2_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
-		},
-		"storagepocpgi_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'storagepocpgi'"
 		}
 	},
 	"variables": {
@@ -103,15 +95,13 @@
 						"inputs": [
 							{
 								"referenceName": "status",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "statusSQL",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -528,27 +518,20 @@
 						"inputs": [
 							{
 								"referenceName": "yms",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "ymsSQL2",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/status')]",
-				"[concat(variables('factoryId'), '/datasets/statusSQL')]",
-				"[concat(variables('factoryId'), '/datasets/yms')]",
-				"[concat(variables('factoryId'), '/datasets/ymsSQL2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
@@ -619,201 +602,20 @@
 						"inputs": [
 							{
 								"referenceName": "predicciones",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable1",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/predicciones')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "delivery",
-						"type": "varchar"
-					},
-					{
-						"name": "fail",
-						"type": "float",
-						"precision": 15
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "predicciones"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prediccion')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "storagepocpgi",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "prediccion_19042021.csv",
-						"container": "prediction"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "delivery",
-						"type": "String"
-					},
-					{
-						"name": "fail",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/storagepocpgi')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/predicciones')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "storagepocpgi",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "prediccion",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "prediccion_19042021.xlsx",
-						"container": "prediction"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "delivery",
-						"type": "String"
-					},
-					{
-						"name": "fail",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/storagepocpgi')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/status')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "storagepocpgi",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "ZVL05N1.xlsx",
-						"container": "status"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "delivery",
-						"type": "String"
-					},
-					{
-						"name": "del_status",
-						"type": "String"
-					},
-					{
-						"name": "Code",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/storagepocpgi')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/statusSQL')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "delivery",
-						"type": "varchar"
-					},
-					{
-						"name": "del_status",
-						"type": "varchar"
-					},
-					{
-						"name": "code",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "delivery_status"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/status_update')]",
@@ -850,375 +652,7 @@
 					}
 				]
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/storagepocpgi')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/yms')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "storagepocpgi",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "1.ZFDE_HISTORY.XLSX",
-						"container": "yms"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/storagepocpgi')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ymsSQL2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Plant",
-						"type": "varchar"
-					},
-					{
-						"name": "Delivery",
-						"type": "varchar"
-					},
-					{
-						"name": "Delivery Type",
-						"type": "varchar"
-					},
-					{
-						"name": "Product",
-						"type": "varchar"
-					},
-					{
-						"name": "Delivery Qty",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Original Qty",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Plan GMDate",
-						"type": "varchar"
-					},
-					{
-						"name": "Shipment",
-						"type": "varchar"
-					},
-					{
-						"name": "Shipping Condition",
-						"type": "varchar"
-					},
-					{
-						"name": "Batch",
-						"type": "varchar"
-					},
-					{
-						"name": "Driver Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Customer Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Customer",
-						"type": "varchar"
-					},
-					{
-						"name": "Trailer Type",
-						"type": "varchar"
-					},
-					{
-						"name": "Trailer Size",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Transport Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Vendor",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Appointment TimeStamp",
-						"type": "varchar"
-					},
-					{
-						"name": "CheckIn",
-						"type": "varchar"
-					},
-					{
-						"name": "Park Time",
-						"type": "varchar"
-					},
-					{
-						"name": "Arrival at Door",
-						"type": "varchar"
-					},
-					{
-						"name": "Load Start",
-						"type": "varchar"
-					},
-					{
-						"name": "Load End",
-						"type": "varchar"
-					},
-					{
-						"name": "Complete time",
-						"type": "varchar"
-					},
-					{
-						"name": "CheckOut",
-						"type": "varchar"
-					},
-					{
-						"name": "Rejection Timestampt",
-						"type": "varchar"
-					},
-					{
-						"name": "CheckIn Form",
-						"type": "varchar"
-					},
-					{
-						"name": "Check Out Form",
-						"type": "varchar"
-					},
-					{
-						"name": "Order",
-						"type": "varchar"
-					},
-					{
-						"name": "Processing system",
-						"type": "varchar"
-					},
-					{
-						"name": "IDOC number",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "yms2"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]"
-				}
-			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/storagepocpgi')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('storagepocpgi_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline1",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2021-04-22T16:00:00",
-						"endTime": "2021-04-23T10:37:00",
-						"timeZone": "Romance Standard Time",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								4
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger2')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline1",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 1,
-						"startTime": "2021-04-22T10:41:00",
-						"timeZone": "Romance Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
-			]
 		}
 	]
 }
