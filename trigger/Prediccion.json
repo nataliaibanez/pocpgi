@@ -1,0 +1,29 @@
+{
+	"name": "Prediccion",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline3",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2021-04-26T17:00:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"hours": [
+						5
+					]
+				}
+			}
+		}
+	}
+}
