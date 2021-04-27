@@ -1,0 +1,26 @@
+{
+	"name": "Predicciones_agg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "delivery",
+				"type": "varchar"
+			},
+			{
+				"name": "fail",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "predicciones_agg"
+		}
+	}
+}
