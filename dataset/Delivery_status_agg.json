@@ -1,0 +1,29 @@
+{
+	"name": "Delivery_status_agg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "delivery",
+				"type": "varchar"
+			},
+			{
+				"name": "del_status",
+				"type": "varchar"
+			},
+			{
+				"name": "code",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "delivery_status_agg"
+		}
+	}
+}

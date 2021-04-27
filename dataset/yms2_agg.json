@@ -1,0 +1,146 @@
+{
+	"name": "yms2_agg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Plant",
+				"type": "varchar"
+			},
+			{
+				"name": "Delivery",
+				"type": "varchar"
+			},
+			{
+				"name": "Delivery Type",
+				"type": "varchar"
+			},
+			{
+				"name": "Product",
+				"type": "varchar"
+			},
+			{
+				"name": "Delivery Qty",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Original Qty",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Plan GMDate",
+				"type": "varchar"
+			},
+			{
+				"name": "Shipment",
+				"type": "varchar"
+			},
+			{
+				"name": "Shipping Condition",
+				"type": "varchar"
+			},
+			{
+				"name": "Batch",
+				"type": "varchar"
+			},
+			{
+				"name": "Driver Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Customer Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Customer",
+				"type": "varchar"
+			},
+			{
+				"name": "Trailer Type",
+				"type": "varchar"
+			},
+			{
+				"name": "Trailer Size",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Transport Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Vendor",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Appointment TimeStamp",
+				"type": "varchar"
+			},
+			{
+				"name": "CheckIn",
+				"type": "varchar"
+			},
+			{
+				"name": "Park Time",
+				"type": "varchar"
+			},
+			{
+				"name": "Arrival at Door",
+				"type": "varchar"
+			},
+			{
+				"name": "Load Start",
+				"type": "varchar"
+			},
+			{
+				"name": "Load End",
+				"type": "varchar"
+			},
+			{
+				"name": "Complete time",
+				"type": "varchar"
+			},
+			{
+				"name": "CheckOut",
+				"type": "varchar"
+			},
+			{
+				"name": "Rejection Timestampt",
+				"type": "varchar"
+			},
+			{
+				"name": "CheckIn Form",
+				"type": "varchar"
+			},
+			{
+				"name": "Check Out Form",
+				"type": "varchar"
+			},
+			{
+				"name": "Order",
+				"type": "varchar"
+			},
+			{
+				"name": "Processing system",
+				"type": "varchar"
+			},
+			{
+				"name": "IDOC number",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "yms2_agg"
+		}
+	}
+}

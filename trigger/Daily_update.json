@@ -14,9 +14,9 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Hour",
-				"interval": 1,
-				"startTime": "2021-04-26T17:00:00",
+				"frequency": "Minute",
+				"interval": 10,
+				"startTime": "2021-04-26T18:00:00",
 				"timeZone": "Romance Standard Time"
 			}
 		}
